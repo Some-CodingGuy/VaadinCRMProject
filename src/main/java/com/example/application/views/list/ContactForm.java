@@ -60,7 +60,7 @@ public class ContactForm extends FormLayout {
 
     public void setContact(Contact contact){
         this.contact = contact;
-        binder.readBean(contact);
+        binder.setBean(contact);
     }
 
     private Component createButtonLayout() {
@@ -70,7 +70,7 @@ public class ContactForm extends FormLayout {
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
         save.addClickListener(event -> validateAndSave());
-        delete.addClickListener(event -> new DeleteEvent(this, binder.getBean()));
+        delete.addClickListener(event -> fireEvent(new DeleteEvent(this, binder.getBean())));
         cancel.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
         save.addClickShortcut(Key.ENTER);
